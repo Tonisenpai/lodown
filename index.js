@@ -142,6 +142,20 @@ module.exports.last = last;
 module.exports.indexOf = indexOf;
 
 /**
+ * contains: Designed to use the ternary operator and check if the value passed
+ * into the function is an element inside the array, returning a boolean value.
+ * 
+ * @param {Array} collection: Function takes in an array
+ * @param {Value} action: Function takes in a value
+ * @returns {Boolean}: Function returns true if array contains value and false if not
+ */
+ function contains(array, value) {
+    // use ternary operator and the includes method to check if array includes the value
+    return array.includes(value) ? true : false;
+}
+module.exports.contains = contains;
+
+/**
  * each: Designed to loop over a collection, Array or Object, and applies the 
  * action Function to each value in the collection.
  * 
@@ -161,3 +175,46 @@ function each(collection, action) {
     }
 }
 module.exports.each = each;
+
+/**
+ * unique: Designed to loop over an Array and pull out the values that are the
+ * first instance of that value and put these in a new array without any of the
+ * duplicate values.
+ * 
+ * @param {Array} collection: The collection over which to iterate
+ * @returns {Array}: returns an array with only unique values and no duplicates
+ */
+ function unique(array) {
+    // create a new set and initialize it to a variable called special
+    let special = [...new Set(array)];
+    // return the variable
+    return special;
+}
+module.exports.unique = unique;
+
+/**
+ * filter: Designed to loop over an Array and use a test function to pull out the 
+ * values that match what the test function is supposed to return and then at the
+ * end, it is suppsosed to return an array that includes those elements.
+ * 
+ * @param {Array} collection: The collection over which to iterate
+ * @param {Function}: takes in a test function with rules in which to filter the elements
+ * @returns {Array}: returns a new array of elements for which calling the function 
+ * returned true
+ */
+ function filter(array, test) {
+    // create a new array variable and initialize it to array literal
+    let outputArr = [];
+    
+    // iterate over the array
+    for (let i = 0; i < array.length; i++) {
+        // create conditional: if - call of function === true
+        if (test(array[i], i, array)) {
+            // push the current index of the array to the output array
+            outputArr.push(array[i]);
+        }
+    }
+    // return the output array
+    return outputArr;
+}
+module.exports.filter = filter;
